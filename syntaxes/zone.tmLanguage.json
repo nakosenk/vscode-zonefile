@@ -27,7 +27,7 @@
 			"name": "variable.other.timeunit.zone_file"
 		},
 		{
-			"begin": "([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z]+)\\s+(.*)\\(",
+			"begin": "([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z0-9]+)\\s+(.*)\\(",
 			"beginCaptures": {
 				"2": {
 					"name": "variable.other.timeunit.zone_file"
@@ -47,7 +47,7 @@
 			"name": "string.quoted.single.address.zone_file"
 		},
 		{
-			"match": "([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z]+)\\s+(.*)",
+			"match": "([A-Za-z0-9_.-]*)\\s+(?:([0-9A-Za-z]*)\\s+)?([I|i][N|n]\\s+[A-Za-z0-9]+)\\s+(.*)",
 			"name": "string.quoted.single.address.zone_file",
 			"captures": {
 				"2": {
