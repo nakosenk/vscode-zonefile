@@ -1,0 +1,92 @@
+{
+    "ZoneFile": {
+        "prefix": "Zone File",
+        "scope": "zone",
+        "body": [
+            "\\$ORIGIN ${1:$TM_FILENAME_BASE}.",
+            "\\$TTL 10800",
+            "@\t\t\tIN\tSOA\t${2:ns1.hostname.com}. hostmaster.${3:hostname.com}. (",
+            "\t\t\t\t\t\t${CURRENT_YEAR}${CURRENT_MONTH}${CURRENT_DATE}01\t; Serial",
+            "\t\t\t\t\t\t10800\t\t; Refresh",
+            "\t\t\t\t\t\t3600\t\t; Retry",
+            "\t\t\t\t\t\t604800\t\t; Expire",
+            "\t\t\t\t\t\t3600\t\t; Minimum",
+            "\t\t\t\t\t)",
+            "",
+            ";Name Servers",
+            "@\t\t\tIN\tNS\t${2:ns1.hostname.com}.",
+            "@\t\t\tIN\tNS\t${4:ns2.hostname.com}.",
+            "",
+            ";Mail Servers",
+            "",
+            ";A Records",
+            "@\t\t\tIN\tA\t${5:63.241.250.146}",
+            "*\t\t\tIN\tA\t${5:63.241.250.146}",
+            "",
+            ";AAAA Records",
+            "",
+            ";CNAME Records",
+            "",
+            ";SRV Records",
+            "",
+            ";TXT Records"
+        ],
+        "description": "Zone file template"
+    },
+    "NS Record": {
+        "prefix": "NS Record",
+        "scope": "zone",
+        "body": [
+            "@\t\t\tIN\tNS\t${1:ns1.hostname.com}."
+        ],
+        "description": "NS Record"
+    },
+    "MX Record": {
+        "prefix": "MX Record",
+        "scope": "zone",
+        "body": [
+            "@\t\t\tIN\tMX\t${1:mail.hostname.com}."
+        ],
+        "description": "MX Record"
+    },
+    "A Record": {
+        "prefix": "A Record",
+        "scope": "zone",
+        "body": [
+            "${1:www}\t\t\tIN\tA\t${2:10.0.0.1}"
+        ],
+        "description": "A Record"
+    },
+    "AAAA Record": {
+        "prefix": "AAAA Record",
+        "scope": "zone",
+        "body": [
+            "${1:www}\t\t\tIN\tAAAA\t${2:10:0:0:1::0}"
+        ],
+        "description": "AAAA Record"
+    },
+    "CNAME Record": {
+        "prefix": "CNAME Record",
+        "scope": "zone",
+        "body": [
+            "${1:alias}\t\t\tIN\tCNAME\t${2:www.hostname.com}."
+        ],
+        "description": "CNAME Record"
+    },
+    "SRV Record": {
+        "prefix": "SRV Record",
+        "scope": "zone",
+        "body": [
+            "${1:_srv}\t\t\tIN\tSRV\t${2:service.hostname.com}."
+        ],
+        "description": "SRV Record"
+    },
+    "TXT Record": {
+        "prefix": "TXT Record",
+        "scope": "zone",
+        "body": [
+            "@\t\t\tIN\tTXT\t\"${1:text}\""
+        ],
+        "description": "TXT Record"
+    }
+}
