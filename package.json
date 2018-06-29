@@ -16,12 +16,13 @@
     "bugs": {
         "url": "https://github.com/nakosenk/vscode-zonefile/issues"
     },
-    "dependencies": {
-        "dns-zonefile": "^0.2.2"
-    },
     "engines": {
-        "vscode": "^1.15.0"
+        "vscode": "^1.24.0"
     },
+    "main": "./out/extension",
+    "activationEvents": [
+        "onLanguage:zone"
+    ],
     "categories": [
         "Programming Languages"
     ],
@@ -53,5 +54,19 @@
                 "path": "./snippets/zone.json"
             }
         ]
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "dependencies": {
+        "dns-zonefile": "^0.2.2"
+    },
+    "devDependencies": {
+        "tslint": "^5.10.0",
+        "typescript": "^2.9.2",
+        "vscode": "^1.1.18",
+        "@types/node": "^10.5.1"
     }
 }
