@@ -16,6 +16,9 @@
     "bugs": {
         "url": "https://github.com/nakosenk/vscode-zonefile/issues"
     },
+    "dependencies": {
+        "dns-zonefile": "^0.2.2"
+    },
     "engines": {
         "vscode": "^1.15.0"
     },
@@ -23,20 +26,32 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "zone",
-            "aliases": ["Bind9 DNS Zone", "zone"],
-            "extensions": [".zone", ".signed"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "zone",
-            "scopeName": "text.zone_file",
-            "path": "./syntaxes/zone.tmLanguage.json"
-        }],
-        "snippets": [{
-            "language": "zone",
-            "path": "./snippets/zone.json"
-        }]
+        "languages": [
+            {
+                "id": "zone",
+                "aliases": [
+                    "Bind9 DNS Zone",
+                    "zone"
+                ],
+                "extensions": [
+                    ".zone",
+                    ".signed"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "zone",
+                "scopeName": "text.zone_file",
+                "path": "./syntaxes/zone.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "zone",
+                "path": "./snippets/zone.json"
+            }
+        ]
     }
 }
