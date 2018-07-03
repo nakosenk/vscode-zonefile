@@ -1,16 +1,16 @@
 'use strict';
 
 import { workspace, languages, window, commands, ExtensionContext, Disposable, TextDocument } from 'vscode';
-// import * as zf from 'dns-zonefile';
-const zf = require('dns-zonefile');
+import { parseZoneFile } from './parser/parser';
+import { ZoneFile } from './parser/types';
 
-let parsedFile: any;
+let parsedFile: ZoneFile;
 
 export function activate(context: ExtensionContext) {
     console.log("vscode-zonefile has loaded.");
 
     let activeEditor = window.activeTextEditor;
-    
+
     if (activeEditor && activeEditor.document.languageId === "zone") {
         parsedFile = parseFile(activeEditor.document);
     }
@@ -28,6 +28,6 @@ export function activate(context: ExtensionContext) {
 	}, null, context.subscriptions);
 }
 
-function parseFile(document: TextDocument) : any {
-    return zf.parse(document.getText());
+function parseFile(document: TextDocument) : ZoneFile {
+    return parseZoneFile(document.getText());
 }
