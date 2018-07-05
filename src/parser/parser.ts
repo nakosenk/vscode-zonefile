@@ -19,10 +19,11 @@ export function parseZoneFile(text: string) : ZoneFile {
 function removeComments(text: string) : string {
     //let re = /(^|[^\\]);.*/g;
     let re = /;(?=([^\"]*\"[^\"]*\")*[^\"]*$).*(^|[^\\])/g;
+    return text.replace(re, "");
 
-    return text.replace(re, function(m, g1) {
+    /*return text.replace(re, function(m, g1) {
         return g1 ? g1 : ""; // if g1 is set/matched, re-insert it, else remove
-    });
+    });*/
 }
 
 function flatten(text: string) : string {
@@ -31,7 +32,7 @@ function flatten(text: string) : string {
     let match = re.exec(text);
     let replacement: string;
 
-    while (match !== null) {
+    while (match != null) {
         replacement = match[0].replace(/\s+/gm, ' ');
         captured.push(match);
         // captured Text, index, input
@@ -73,7 +74,7 @@ function parseTtl(ttl: string) : number {
 
         if (multiplier !== -1 && ttl !== "NS") {
             ttlInSeconds = parseInt(ttl.substr(0, ttl.length-1), 10) * multiplier;
-        } else if (currentTTL !== null) {
+        } else if (currentTTL != null) {
             ttlInSeconds = currentTTL;
         }
     }
@@ -98,14 +99,14 @@ function parseRRs(text: string) : ZoneFile {
             ret.txt = ret.txt || [];
             ret.txt.push(parseTXT(rr));
         } else if (uRR.indexOf('$ORIGIN') === 0) {
-            if (ret.origin === null) {
+            if (ret.origin == null) {
                 ret.origin = rr.split(/\s+/g)[1];
                 currentOrigin = ret.origin;
             } else {
                 currentOrigin = rr.split(/\s+/g)[1];
             }
         } else if (uRR.indexOf('$TTL') === 0) {
-            if (ret.ttl === null) {
+            if (ret.ttl == null) {
                 ret.ttl = parseInt(rr.split(/\s+/g)[1], 10);
                 currentTTL = ret.ttl;
             } else {
@@ -225,7 +226,7 @@ function parseA(rr: string, recordsSoFar: ARecord[]) : ARecord {
     let l = rrTokens.length;
     let suffix: string;
 
-    if (currentOrigin === null || currentOrigin === '.') {
+    if (currentOrigin == null || currentOrigin === '.') {
         suffix = '';
     } else {
         suffix = "." + currentOrigin;
@@ -255,7 +256,7 @@ function parseAAAA(rr: string) : AaaaRecord {
     let l = rrTokens.length;
     let suffix: string;
 
-    if (currentOrigin === null || currentOrigin === '.') {
+    if (currentOrigin == null || currentOrigin === '.') {
         suffix = '';
     } else {
         suffix = "." + currentOrigin;
@@ -276,7 +277,7 @@ function parseCNAME(rr: string) : CnameRecord {
     let l = rrTokens.length;
     let suffix: string;
 
-    if (currentOrigin === null || currentOrigin === '.') {
+    if (currentOrigin == null || currentOrigin === '.') {
         suffix = '';
     } else {
         suffix = "." + currentOrigin;

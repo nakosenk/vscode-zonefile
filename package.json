@@ -48,6 +48,12 @@
                 "path": "./syntaxes/zone.tmLanguage.json"
             }
         ],
+        "commands":[
+            {
+                "command": "vscode-zonefile.formatZoneFileDocument",
+                "title": "Format Zone File"
+            }
+        ],
         "snippets": [
             {
                 "language": "zone",
