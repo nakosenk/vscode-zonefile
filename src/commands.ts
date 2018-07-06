@@ -19,7 +19,9 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
     let nsRecords = [ "\n;Name Servers" ];
 
     if (zoneFile.ns != undefined) {
-        for (let ns of zoneFile.ns) {
+        for (let ns of zoneFile.ns.sort(function(a,b) {
+            return a.name.value.localeCompare(b.name.value);
+        })) {
             let record = `${ns.name.value}\t\t\tIN\tNS\t${ns.host.value}`;
             nsRecords.push(record);
         }
@@ -30,7 +32,9 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
     let mxRecords = [ "\n;Mail Servers" ];
 
     if (zoneFile.mx != undefined) {
-        for (let mx of zoneFile.mx) {
+        for (let mx of zoneFile.mx.sort(function(a,b) {
+            return a.name.value.localeCompare(b.name.value);
+        })) {
             let record = `${mx.name.value}\t\t\tIN\tMX\t${mx.host.value}`;
             mxRecords.push(record);
         }
@@ -41,7 +45,9 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
     let aRecords = [ "\n;A Records" ];
 
     if (zoneFile.a != undefined) {
-        for (let a of zoneFile.a) {
+        for (let a of zoneFile.a.sort(function(a,b) {
+            return a.name.value.localeCompare(b.name.value);
+        })) {
             let record = `${a.name.value}\t\t\tIN\tA\t${a.ipAddress.value}`;
             aRecords.push(record);
         }
@@ -52,7 +58,9 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
     let aaaaRecords = [ "\n;AAAA Records" ];
 
     if (zoneFile.aaaa != undefined) {
-        for (let aaaa of zoneFile.aaaa) {
+        for (let aaaa of zoneFile.aaaa.sort(function(a,b) {
+            return a.name.value.localeCompare(b.name.value);
+        })) {
             let record = `${aaaa.name.value}\t\t\tIN\tAAAA\t${aaaa.ipAddress.value}`;
             aaaaRecords.push(record);
         }
@@ -63,7 +71,9 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
     let cnameRecords = [ "\n;CNAME Records" ];
 
     if (zoneFile.cname != undefined) {
-        for (let cname of zoneFile.cname) {
+        for (let cname of zoneFile.cname.sort(function(a,b) {
+            return a.name.value.localeCompare(b.name.value);
+        })) {
             let record = `${cname.name.value}\t\t\tIN\tCNAME\t${cname.alias.value}`;
             cnameRecords.push(record);
         }
@@ -74,7 +84,9 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
     let srvRecords = [ "\n;SRV Records" ];
 
     if (zoneFile.srv != undefined) {
-        for (let srv of zoneFile.srv) {
+        for (let srv of zoneFile.srv.sort(function(a,b) {
+            return a.name.value.localeCompare(b.name.value);
+        })) {
             let record = `${srv.name.value}\t\t\tIN\tSRV\t${srv.target.value}`;
             srvRecords.push(record);
         }
@@ -85,8 +97,10 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
     let txtRecords = [ "\n;TXT Records" ];
 
     if (zoneFile.txt != undefined) {
-        for (let txt of zoneFile.txt) {
-            let record = `${txt.name.value}\t\t\tIN\tTXT\t${txt.txt.value}`;
+        for (let txt of zoneFile.txt.sort(function(a,b) {
+            return a.name.value.localeCompare(b.name.value);
+        })) {
+            let record = `${txt.name.value}\t\t\tIN\tTXT\t"${txt.txt.value}"`;
             txtRecords.push(record);
         }
     }
