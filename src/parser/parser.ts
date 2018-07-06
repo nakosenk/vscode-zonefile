@@ -117,6 +117,9 @@ function parseRRs(text: string) : ZoneFile {
         } else if (/\s+NS\s+/.test(uRR)) {
             ret.ns = ret.ns || [];
             ret.ns.push(parseNS(rr));
+        } else if (/\s+SPF\s+/.test(uRR)) {
+            ret.spf = ret.spf || [];
+            ret.spf.push(parseSPF(rr));
         } else if (/\s+A\s+/.test(uRR)) {
             ret.a = ret.a || [];
             ret.a.push(parseA(rr, ret.a));
@@ -135,9 +138,6 @@ function parseRRs(text: string) : ZoneFile {
         } else if (/\s+SRV\s+/.test(uRR)) {
             ret.srv = ret.srv || [];
             ret.srv.push(parseSRV(rr));
-        } else if (/\s+SPF\s+/.test(uRR)) {
-            ret.spf = ret.spf || [];
-            ret.spf.push(parseSPF(rr));
         } else if (/\s+URI\s+/.test(uRR)) {
             ret.uri = ret.uri || [];
             ret.uri.push(parseURI(rr));
