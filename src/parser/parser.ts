@@ -113,7 +113,11 @@ function parseRRs(text: string) : ZoneFile {
                 currentTTL = parseInt(rr.split(/\s+/g)[1], 10);
             }
         } else if (/\s+SOA\s+/.test(uRR)) {
-            ret.soa = parseSOA(rr);
+            ret.soa = parseSOA(rr, ret);
+
+            if (ret.soa.name !== '@') {
+                ret.origin = ret.soa.name + '.';
+            }
         } else if (/\s+NS\s+/.test(uRR)) {
             ret.ns = ret.ns || [];
             ret.ns.push(parseNS(rr));
@@ -149,7 +153,7 @@ function parseRRs(text: string) : ZoneFile {
     return ret;
 }
 
-function parseSOA(rr: string) : StartOfAuthority {
+function parseSOA(rr: string, zoneFile: ZoneFile) : StartOfAuthority {
     let soa = new StartOfAuthority();
     let rrTokens = rr.trim().split(/\s+/g);
     let l = rrTokens.length;
