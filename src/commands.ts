@@ -6,7 +6,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
         `$ORIGIN ${zoneFile.origin}`,
         `$TTL ${zoneFile.ttl}`,
         `@\t\t\tIN\tSOA\t${zoneFile.soa.mname} ${zoneFile.soa.rname} (`,
-        `\t\t\t\t\t\t${zoneFile.soa.serial}\t; Serial`,
+        `\t\t\t\t\t\t${zoneFile.soa.serial + 1}\t; Serial`,
         `\t\t\t\t\t\t${zoneFile.soa.refresh}\t\t; Refresh`,
         `\t\t\t\t\t\t${zoneFile.soa.retry}\t\t; Retry`,
         `\t\t\t\t\t\t${zoneFile.soa.expire}\t\t; Expire`,
