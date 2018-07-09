@@ -18,7 +18,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
 
     let nsRecords = [ "\n;Name Servers" ];
 
-    if (zoneFile.ns != undefined) {
+    if (zoneFile.ns != null) {
         for (let ns of zoneFile.ns.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
@@ -31,7 +31,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
 
     let mxRecords = [ "\n;Mail Servers" ];
 
-    if (zoneFile.mx != undefined) {
+    if (zoneFile.mx != null) {
         for (let mx of zoneFile.mx.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
@@ -44,7 +44,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
 
     let aRecords = [ "\n;A Records" ];
 
-    if (zoneFile.a != undefined) {
+    if (zoneFile.a != null) {
         for (let a of zoneFile.a.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
@@ -57,7 +57,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
 
     let aaaaRecords = [ "\n;AAAA Records" ];
 
-    if (zoneFile.aaaa != undefined) {
+    if (zoneFile.aaaa != null) {
         for (let aaaa of zoneFile.aaaa.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
@@ -70,7 +70,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
 
     let cnameRecords = [ "\n;CNAME Records" ];
 
-    if (zoneFile.cname != undefined) {
+    if (zoneFile.cname != null) {
         for (let cname of zoneFile.cname.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
@@ -83,7 +83,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
 
     let srvRecords = [ "\n;SRV Records" ];
 
-    if (zoneFile.srv != undefined) {
+    if (zoneFile.srv != null) {
         for (let srv of zoneFile.srv.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
@@ -96,7 +96,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
 
     let txtRecords = [ "\n;TXT Records" ];
 
-    if (zoneFile.txt != undefined) {
+    if (zoneFile.txt != null) {
         for (let txt of zoneFile.txt.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
