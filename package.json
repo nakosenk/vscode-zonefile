@@ -66,9 +66,6 @@
         "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
-    "dependencies": {
-        "dns-zonefile": "^0.2.2"
-    },
     "devDependencies": {
         "tslint": "^5.10.0",
         "typescript": "^2.9.2",
