@@ -35,7 +35,12 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
         for (let mx of zoneFile.mx.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
-            let record = `${mx.name.value}\t\t\tIN\tMX\t${mx.host.value}`;
+            let ttl = "\t";
+            if (mx.ttl && mx.ttl !== zoneFile.ttl) {
+                ttl = mx.ttl.toString();
+            }
+
+            let record = `${mx.name.value}\t${ttl}\tIN\tMX\t${mx.host.value}`;
             mxRecords.push(record);
         }
     }
@@ -48,7 +53,12 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
         for (let a of zoneFile.a.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
-            let record = `${a.name.value.replace('.' + zoneFile.origin, '')}\t\t\tIN\tA\t${a.ipAddress.value}`;
+            let ttl = "\t";
+            if (a.ttl && a.ttl !== zoneFile.ttl) {
+                ttl = a.ttl.toString();
+            }
+
+            let record = `${a.name.value.replace('.' + zoneFile.origin, '')}\t${ttl}\tIN\tA\t${a.ipAddress.value}`;
             aRecords.push(record);
         }
     }
@@ -61,7 +71,12 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
         for (let aaaa of zoneFile.aaaa.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
-            let record = `${aaaa.name.value}\t\t\tIN\tAAAA\t${aaaa.ipAddress.value}`;
+            let ttl = "\t";
+            if (aaaa.ttl && aaaa.ttl !== zoneFile.ttl) {
+                ttl = aaaa.ttl.toString();
+            }
+
+            let record = `${aaaa.name.value}\t${ttl}\tIN\tAAAA\t${aaaa.ipAddress.value}`;
             aaaaRecords.push(record);
         }
     }
@@ -74,7 +89,12 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
         for (let cname of zoneFile.cname.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
-            let record = `${cname.name.value.replace('.' + zoneFile.origin, '')}\t\t\tIN\tCNAME\t${cname.alias.value}`;
+            let ttl = "\t";
+            if (cname.ttl && cname.ttl !== zoneFile.ttl) {
+                ttl = cname.ttl.toString();
+            }
+
+            let record = `${cname.name.value.replace('.' + zoneFile.origin, '')}\t${ttl}\tIN\tCNAME\t${cname.alias.value}`;
             cnameRecords.push(record);
         }
     }
@@ -87,7 +107,12 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
         for (let srv of zoneFile.srv.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
-            let record = `${srv.name.value}\t\t\tIN\tSRV\t${srv.target.value}`;
+            let ttl = "\t";
+            if (srv.ttl && srv.ttl !== zoneFile.ttl) {
+                ttl = srv.ttl.toString();
+            }
+
+            let record = `${srv.name.value}\t${ttl}\tIN\tSRV\t${srv.target.value}`;
             srvRecords.push(record);
         }
     }
@@ -101,12 +126,17 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
             return a.name.value.localeCompare(b.name.value);
         })) {
             let value = txt.txt.value;
+            let ttl = "\t";
+            if (txt.ttl && txt.ttl !== zoneFile.ttl) {
+                ttl = txt.ttl.toString();
+            }
+
 
             if (txt.txt.value.indexOf(" ") !== -1) {
                 value = "\"" + value + "\"";
             }
 
-            let record = `${txt.name.value}\t\t\tIN\tTXT\t${value}`;
+            let record = `${txt.name.value}\t${ttl}\tIN\tTXT\t${value}`;
             txtRecords.push(record);
         }
     }
