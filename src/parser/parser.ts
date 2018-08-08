@@ -174,13 +174,19 @@ function parseSOA(rr: string, zoneFile: ZoneFile) : StartOfAuthority {
 function parseNS(rr: string) : NameServerRecord {
     let rrTokens = rr.trim().split(/\s+/g);
     let l = rrTokens.length;
-
     let name: string;
+    let suffix: string;
+
+    if (currentOrigin == null || currentOrigin === '.') {
+        suffix = '';
+    } else {
+        suffix = "." + currentOrigin;
+    }
 
     if (rrTokens[0] === "NS" || !isNaN(Number(rrTokens[0]))) {
         name = "@";
     } else {
-        name = rrTokens[0];
+        name = rrTokens[0] + suffix;
     }
 
     let result: NameServerRecord = {
@@ -200,13 +206,19 @@ function parseNS(rr: string) : NameServerRecord {
 function parseMX(rr: string) : MailRecord {
     let rrTokens = rr.trim().split(/\s+/g);
     let l = rrTokens.length;
-
     let name: string;
+    let suffix: string;
+
+    if (currentOrigin == null || currentOrigin === '.') {
+        suffix = '';
+    } else {
+        suffix = "." + currentOrigin;
+    }
 
     if (rrTokens[0] === "MX" || !isNaN(Number(rrTokens[0]))) {
         name = "@";
     } else {
-        name = rrTokens[0];
+        name = rrTokens[0] + suffix;
     }
 
     let result: MailRecord = {
@@ -301,6 +313,13 @@ function parseTXT(rr: string) : TxtRecord {
     let rrTokens = rr.trim().match(/[^\s\"']+|\"[^\"]*\"|'[^']*'/g);
     let l = rrTokens.length;
     let indexTXT = rrTokens.indexOf('TXT');
+    let suffix: string;
+
+    if (currentOrigin == null || currentOrigin === '.') {
+        suffix = '';
+    } else {
+        suffix = "." + currentOrigin;
+    }
 
     let stripText = function(txt) {
         if (txt.indexOf('\"') > -1) {
@@ -326,7 +345,7 @@ function parseTXT(rr: string) : TxtRecord {
     if (indexTXT === 0 || !isNaN(Number(rrTokens[0]))) {
         name = "@";
     } else {
-        name = rrTokens[0];
+        name = rrTokens[0] + suffix;
     }
 
     let result: TxtRecord = {
