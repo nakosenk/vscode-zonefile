@@ -22,7 +22,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
         for (let ns of zoneFile.ns.sort(function(a,b) {
             return a.name.value.localeCompare(b.name.value);
         })) {
-            let record = `${ns.name.value}\t\t\tIN\tNS\t${ns.host.value}`;
+            let record = `${ns.name.value.replace('.' + zoneFile.origin, '')}\t\t\tIN\tNS\t${ns.host.value}`;
             nsRecords.push(record);
         }
     }
@@ -40,7 +40,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
                 ttl = mx.ttl.toString();
             }
 
-            let record = `${mx.name.value}\t${ttl}\tIN\tMX\t${mx.host.value}`;
+            let record = `${mx.name.value.replace('.' + zoneFile.origin, '')}\t${ttl}\tIN\tMX\t${mx.host.value}`;
             mxRecords.push(record);
         }
     }
@@ -136,7 +136,7 @@ export function formatZoneFile(zoneFile: ZoneFile) : string {
                 value = "\"" + value + "\"";
             }
 
-            let record = `${txt.name.value}\t${ttl}\tIN\tTXT\t${value}`;
+            let record = `${txt.name.value.replace('.' + zoneFile.origin, '')}\t${ttl}\tIN\tTXT\t${value}`;
             txtRecords.push(record);
         }
     }
